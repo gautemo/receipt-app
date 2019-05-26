@@ -34,4 +34,40 @@ nav {
   color: #333;
   font-weight: bold;
 }
+
+[type="file"] {
+  height: 0;
+  overflow: hidden;
+  width: 0;
+}
+
+[type="file"] + label,
+button {
+  --color: #f07d00;
+  --second-color: #ff591a;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 2em;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  outline: none;
+  padding: 1rem 50px;
+  position: relative;
+  vertical-align: middle;
+  background-color: var(--color);
+  box-shadow: 0 6px var(--second-color);
+}
+
+[type="file"] + label:hover,
+button:hover {
+  box-shadow: 0 3px var(--second-color);
+  top: 2px;
+}
+
+button {
+  font-family: inherit;
+}
 </style>
