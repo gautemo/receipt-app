@@ -27,7 +27,8 @@ div {
   grid-template-columns: 150px auto 300px 300px;
   grid-gap: 20px;
   align-items: center;
-  margin: 5px 25px;
+  padding: 15px 50px;
+  border-bottom: 2px solid rgba(128, 128, 128, 0.5);
 }
 
 img {

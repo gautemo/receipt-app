@@ -6,11 +6,23 @@
 </template>
 
 <script>
+import firebase from "@/firebaseinit";
+import "firebase/storage";
+
+const storage = firebase.storage().ref();
+
+function generateUniqueId() {
+  return new Date().getTime();
+}
+
 export default {
   name: "newimg",
   methods: {
     addImg(e) {
-      console.log(e.target.files[0]);
+      const file = e.target.files[0];
+      const userId = 123;
+      const receiptId = generateUniqueId();
+      storage.child(`/${userId}/${receiptId}`).put(file);
     }
   }
 };
