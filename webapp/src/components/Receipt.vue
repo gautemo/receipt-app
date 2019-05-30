@@ -1,22 +1,34 @@
 <template>
   <div>
     <img :src="img">
-    <p>Total: {{ total }}</p>
     <button @click="download">DOWNLOAD</button>
     <button @click="del" class="del">DELETE</button>
   </div>
 </template>
 
 <script>
+import firebase from "@/firebaseinit";
+import "firebase/storage";
+
+const storage = firebase.storage().ref();
+
 export default {
   name: "Receipt",
   props: {
-    img: String,
-    total: String
+    id: String,
+    path: String
+  },
+  data() {
+    return {
+      img: require("@/assets/placeholder.png")
+    };
   },
   methods: {
     download() {},
     del() {}
+  },
+  async created() {
+    this.img = await storage.child(this.path).getDownloadURL();
   }
 };
 </script>
@@ -24,9 +36,10 @@ export default {
 <style scoped>
 div {
   display: grid;
-  grid-template-columns: 150px auto 300px 300px;
-  grid-gap: 20px;
+  grid-template-columns: 150px 300px 300px;
+  grid-gap: 50px;
   align-items: center;
+  justify-content: center;
   padding: 15px 50px;
   border-bottom: 2px solid rgba(128, 128, 128, 0.5);
 }
