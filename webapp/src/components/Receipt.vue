@@ -1,8 +1,8 @@
 <template>
   <div>
     <img :src="img">
-    <button @click="download">DOWNLOAD</button>
-    <button @click="del" class="del">DELETE</button>
+    <button class="btn" @click="download">DOWNLOAD</button>
+    <button class="btn del" @click="del">DELETE</button>
   </div>
 </template>
 

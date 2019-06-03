@@ -43,7 +43,7 @@ nav {
 }
 
 [type="file"] + label,
-button {
+.btn {
   --color: #f07d00;
   --second-color: #ff591a;
   border: none;
@@ -63,12 +63,12 @@ button {
 }
 
 [type="file"] + label:hover,
-button:hover {
+.btn:hover {
   box-shadow: 0 3px var(--second-color);
   top: 2px;
 }
 
-button {
+.btn {
   font-family: inherit;
 }
 </style>
