@@ -8,6 +8,7 @@
 <script>
 import firebase from "@/firebaseinit";
 import "firebase/storage";
+import "firebase/auth";
 
 const storage = firebase.storage().ref();
 
@@ -20,7 +21,7 @@ export default {
   methods: {
     addImg(e) {
       const file = e.target.files[0];
-      const userId = 123;
+      const userId = firebase.auth().currentUser.uid;
       const receiptId = generateUniqueId();
       storage.child(`/${userId}/${receiptId}`).put(file);
     }

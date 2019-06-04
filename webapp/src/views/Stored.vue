@@ -7,6 +7,7 @@
 <script>
 import firebase from "@/firebaseinit";
 import "firebase/firestore";
+import "firebase/auth";
 
 export default {
   name: "stored",
@@ -19,7 +20,8 @@ export default {
     Receipt: () => import("@/components/Receipt.vue")
   },
   created() {
-    const userCollection = firebase.firestore().collection("123");
+    const userId = firebase.auth().currentUser.uid;
+    const userCollection = firebase.firestore().collection(userId);
 
     userCollection.onSnapshot(async snapshot => {
       for (const change of snapshot.docChanges()) {
