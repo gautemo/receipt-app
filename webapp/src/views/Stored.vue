@@ -23,7 +23,7 @@ export default {
     const userId = firebase.auth().currentUser.uid;
     const userCollection = firebase.firestore().collection(userId);
 
-    userCollection.orderBy("created_at").onSnapshot(async snapshot => {
+    userCollection.orderBy("created_at").onSnapshot(snapshot => {
       for (const change of snapshot.docChanges()) {
         if (change.type === "added") {
           this.receipts.unshift({

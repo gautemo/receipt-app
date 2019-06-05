@@ -23,7 +23,7 @@ export default {
       const file = e.target.files[0];
       const userId = firebase.auth().currentUser.uid;
       const receiptId = generateUniqueId();
-      storage.child(`/${userId}/${receiptId}`).put(file);
+      storage.child(`/${userId}/${receiptId}${file.name}`).put(file);
     }
   }
 };

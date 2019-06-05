@@ -1,7 +1,6 @@
 <template>
   <div>
     <img :src="img">
-    <button class="btn" @click="download">DOWNLOAD</button>
     <button class="btn del" @click="del">DELETE</button>
   </div>
 </template>
@@ -24,8 +23,7 @@ export default {
     };
   },
   methods: {
-    download() {},
-    del() {}
+    del() { }
   },
   async created() {
     this.img = await storage.child(this.path).getDownloadURL();
@@ -36,7 +34,7 @@ export default {
 <style scoped>
 div {
   display: grid;
-  grid-template-columns: 150px 300px 300px;
+  grid-template-columns: 200px 200px;
   grid-gap: 50px;
   align-items: center;
   justify-content: center;
@@ -45,7 +43,7 @@ div {
 }
 
 img {
-  height: 120px;
+  height: 150px;
   width: 100%;
   object-fit: cover;
 }
