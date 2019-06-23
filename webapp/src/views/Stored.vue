@@ -29,7 +29,7 @@ export default {
       .storage()
       .ref(`${userId}`)
       .listAll();
-    this.receipts = res.items;
+    this.receipts = res.items.reverse();
   }
 };
 </script>
