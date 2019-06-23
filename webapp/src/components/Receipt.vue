@@ -1,51 +1,64 @@
 <template>
   <div>
-    <img :src="img">
-    <button class="btn del" @click="del">DELETE</button>
+    <img class="small" :src="img" @click="zoom = true">
+    <div v-if="zoom" @click="zoom = false" class="modal">
+      <img class="big" :src="img" @click.stop>
+      <button class="btn del" @click.stop="del">DELETE</button>
+    </div>
   </div>
 </template>
 
 <script>
-import firebase from "@/firebaseinit";
-import "firebase/storage";
-
-const storage = firebase.storage().ref();
-
 export default {
   name: "Receipt",
   props: {
-    id: String,
-    path: String
+    storageRef: Object
   },
   data() {
     return {
-      img: require("@/assets/placeholder.png")
+      img: require("@/assets/placeholder.png"),
+      zoom: false
     };
   },
   methods: {
-    del() { }
+    async del() {
+      await this.storageRef.delete();
+      this.$emit("remove");
+    }
   },
   async created() {
-    this.img = await storage.child(this.path).getDownloadURL();
+    this.img = await this.storageRef.getDownloadURL();
   }
 };
 </script>
 
 <style scoped>
-div {
-  display: grid;
-  grid-template-columns: 200px 200px;
-  grid-gap: 50px;
-  align-items: center;
-  justify-content: center;
-  padding: 15px 50px;
-  border-bottom: 2px solid rgba(128, 128, 128, 0.5);
-}
-
-img {
-  height: 150px;
+.small {
+  height: 100%;
   width: 100%;
   object-fit: cover;
+}
+
+.big {
+  height: 100%;
+  width: 100%;
+  margin-bottom: 10px;
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.modal {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20vh;
+  background: rgba(0, 0, 0, 0.4);
 }
 
 .del {

@@ -1,12 +1,11 @@
 <template>
-  <div>
-    <receipt v-for="r in receipts" :key="r.id" :path="r.path" :id="r.id"/>
+  <div class="grid">
+    <receipt v-for="r in receipts" :storageRef="r" :key="r.name" v-on:remove="del(r.name)"/>
   </div>
 </template>
 
 <script>
 import firebase from "@/firebaseinit";
-import "firebase/firestore";
 import "firebase/auth";
 
 export default {
@@ -16,28 +15,29 @@ export default {
       receipts: []
     };
   },
+  methods: {
+    del(name) {
+      this.receipts = this.receipts.filter(r => r.name !== name);
+    }
+  },
   components: {
     Receipt: () => import("@/components/Receipt.vue")
   },
-  created() {
+  async created() {
     const userId = firebase.auth().currentUser.uid;
-    const userCollection = firebase.firestore().collection(userId);
-
-    userCollection.orderBy("created_at").onSnapshot(snapshot => {
-      for (const change of snapshot.docChanges()) {
-        if (change.type === "added") {
-          this.receipts.unshift({
-            id: change.doc.id,
-            path: change.doc.data().path
-          });
-        } else if (change.type === "removed") {
-          this.receipts.splice(
-            this.receipts.findIndex(i => i.id === change.doc.id),
-            1
-          );
-        }
-      }
-    });
+    const res = await firebase
+      .storage()
+      .ref(`${userId}`)
+      .listAll();
+    this.receipts = res.items;
   }
 };
 </script>
+
+<style scoped>
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-auto-rows: 250px;
+}
+</style>
