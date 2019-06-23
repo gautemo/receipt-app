@@ -58,7 +58,7 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 20vh;
+  padding: 20vh 10vw;
   background: rgba(0, 0, 0, 0.4);
 }
 

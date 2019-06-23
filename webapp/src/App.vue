@@ -24,7 +24,7 @@ body {
 
 nav {
   background-image: linear-gradient(135deg, #f07d00 10%, #cf022b 100%);
-  font-size: 2em;
+  font-size: calc(1.2vw + 10px);
   padding: 20px;
   display: flex;
   justify-content: space-around;
@@ -51,11 +51,11 @@ nav {
   color: #fff;
   cursor: pointer;
   display: inline-block;
-  font-size: 2em;
+  font-size: 1.2em;
   font-weight: 600;
   margin-bottom: 1rem;
   outline: none;
-  padding: 1rem 50px;
+  padding: 1rem 30px;
   position: relative;
   vertical-align: middle;
   background-color: var(--color);
