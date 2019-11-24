@@ -1,0 +1,6 @@
+{
+    "scripts": {
+        "deploy": "npm run build --prefix webapp && firebase deploy",
+        "serve": "npm run serve --prefix webapp"
+    }
+}
